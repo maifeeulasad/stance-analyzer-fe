@@ -1,23 +1,58 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Button, Input, message, List } from 'antd';
 
-import styles from './Landing.module.scss';
+const Landing = () => {
 
-import logo from './landing.svg';
+  const [inputText, setInputText] = useState('');
+  const [emojis] = useState(['😊', '🚀', '🎉', '🌟', '❤️', '👍', '😎']);
+  const [selectedEmoji, setSelectedEmoji] = useState('');
 
-const Landing = () => (
-  <div>
+  const handleInputChange = (e: any) => {
+    setInputText(e.target.value);
+  };
 
-    <header>
-      <img src={logo} className="animate-spin h-10" alt="logo" />
-      <div className="text-red-600">
-        React + TS + Vite + Tailwind
-      </div>
-      <div className={styles.sassExample}>
-        sass is here for styling
-      </div>
-    </header>
+  const handleProceedClick = () => {
+    if (!inputText.trim()) {
+      message.error('Please enter some text before proceeding.');
+      return;
+    }
+
+    // Logic to generate a random emoji
+    const emojis = ['😊', '🚀', '🎉', '🌟', '❤️', '👍', '😎'];
+    const randomIndex = Math.floor(Math.random() * emojis.length);
+    const selectedEmoji = emojis[randomIndex];
+
+    setSelectedEmoji(selectedEmoji);
+  };
+
+  return <div>
+    <Input.TextArea
+      rows={4}
+      placeholder="Enter some text"
+      value={inputText}
+      onChange={handleInputChange}
+    />
+    <Button
+      style={{ backgroundColor: '#1677ff', marginTop: '10px' }}
+      type="primary"
+      onClick={handleProceedClick}>
+      Proceed
+    </Button>
+    <List
+      itemLayout='horizontal'
+      style={{ display: 'flex', justifyContent: 'center' }}
+      bordered
+      dataSource={emojis}
+      renderItem={(item) => (
+        <List.Item
+          className={item === selectedEmoji ? 'shake' : ''}
+          style={{ display: 'inline-block', margin: '0 8px', backgroundColor: item === selectedEmoji ? '#e6f7ff' : 'inherit' }}>
+          {item}
+        </List.Item>
+      )}
+    />
   </div>
-);
+}
 
 // eslint-disable-next-line import/no-default-export
 export default Landing;
