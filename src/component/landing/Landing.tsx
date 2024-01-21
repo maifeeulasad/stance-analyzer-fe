@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Input, message, List } from 'antd';
 
 const Landing = () => {
-
+  const [loading, setLoading] = useState(false);
   const [inputText, setInputText] = useState('');
   const [emojis] = useState(['😊', '🚀', '🎉', '🌟', '❤️', '👍', '😎']);
   const [selectedEmoji, setSelectedEmoji] = useState('');
@@ -12,17 +12,22 @@ const Landing = () => {
   };
 
   const handleProceedClick = () => {
+    setLoading(true);
     if (!inputText.trim()) {
       message.error('Please enter some text before proceeding.');
+
+      setLoading(false);
       return;
     }
 
-    // Logic to generate a random emoji
     const emojis = ['😊', '🚀', '🎉', '🌟', '❤️', '👍', '😎'];
     const randomIndex = Math.floor(Math.random() * emojis.length);
     const selectedEmoji = emojis[randomIndex];
 
     setSelectedEmoji(selectedEmoji);
+    message.success('Stance classification successful.');
+
+    setLoading(false);
   };
 
   return <div>
@@ -35,6 +40,7 @@ const Landing = () => {
     <div style={{ display: 'flex' }}>
       <div style={{ flex: '1' }}></div>
       <Button
+        loading={loading}
         style={{ justifyContent: 'center', backgroundColor: '#1677ff', margin: '10px' }}
         type="primary"
         onClick={handleProceedClick}>
@@ -43,6 +49,7 @@ const Landing = () => {
       <div style={{ flex: '1' }}></div>
     </div>
     <List
+      loading={loading}
       itemLayout='horizontal'
       style={{ display: 'flex', justifyContent: 'center' }}
       bordered
