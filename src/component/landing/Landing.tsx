@@ -32,12 +32,16 @@ const Landing = () => {
       value={inputText}
       onChange={handleInputChange}
     />
-    <Button
-      style={{ backgroundColor: '#1677ff', marginTop: '10px' }}
-      type="primary"
-      onClick={handleProceedClick}>
-      Proceed
-    </Button>
+    <div style={{ display: 'flex' }}>
+      <div style={{ flex: '1' }}></div>
+      <Button
+        style={{ justifyContent: 'center', backgroundColor: '#1677ff', margin: '10px' }}
+        type="primary"
+        onClick={handleProceedClick}>
+        Proceed
+      </Button>
+      <div style={{ flex: '1' }}></div>
+    </div>
     <List
       itemLayout='horizontal'
       style={{ display: 'flex', justifyContent: 'center' }}
