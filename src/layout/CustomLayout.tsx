@@ -10,15 +10,9 @@ const CustomHeader = () => {
   return (
     <PageHeader
       className="site-page-header h-full"
-      title={<Link to="/">React Pipeline</Link>}
-      subTitle="SPA using React + TS + Vite + Tailwind"
+      title={<Link to="/">Stance Classifier</Link>}
+      subTitle="Stance Classification FE using React"
       onBack={() => navigate(-1)}
-      extra={
-        <>
-          <Link to="/page2">Page 2</Link>
-          <Link to="/page3">Page 3</Link>
-        </>
-      }
     />
   );
 };
